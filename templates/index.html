@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Magic Wardrobe Main Page</title>
+{% endblock %}
+
+{% block body %}
+
+<!--Jack's work -->
+<div id="logo" style="float:left; margin:10px">
+    <img src="static/images/wardrobeicon.png" width="90" height="90"/>
+</div>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<div id="header">
+    <h1>Magic Wardrobe</h1>
+</div>
+
+<hr style="clear:both">
+
+<!--Habib's work -->
+
+<div class="div1" style="float:left; width: 25%; background-color:rgb(176, 222, 222)">
+	<p id="city">City: {{city}} </p>
+	<p id="switch_Temp">Temperature: {{temp}}&degC</p>
+	<p id="feels_like">Feels like: {{feels_like}}&degC</p>
+	<p id="humidity">Humidity: {{humidity}}%</p>
+	<p id="pressure">Pressure: {{pressure}} hPa</p>
+	<p id="desc">Description: {{description}}</p>
+	<img src = "{{icon_url}}" width="200" height="200">
+	<p style="margin-top: 0px; padding-bottom: 0%;"><button  type="submit" value="click" onclick="TempC_to_Fah(); switch_feels_like();switch_btn_text()" id="btn_Switch" style="padding: 8px; background-color: darkgreen; color: white; " > Switch to &degF</button></p>
+</div>
+
+<hr style="clear:both";>
+
+<!--Mustafa's work-->
+<div id = "image">
+    <h2>Recommended Outfit</h2>
+    <img id="mainImage" src="" style="width:120px;">
+</div>
+
+<button onClick="changeOutfit()">Change outfit</button>
+
+<!--Adrian's work
+<form action="" method="POST"></form>
+
+<div class="bg-modal">
+    <div class="modal-content">
+        <div class="close" id="close">+</div>
+        <img src="static/images/location.jpg" width="80px" height="80px"> 
+
+        <p>Please enter your ZIP code below</p>
+        <form action="/" method="POST">
+            <input type="text" placeholder="A1A 1A1" name="zip" id="zip" required="required" pattern="[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</div>
+
+-->
+
+<script>
+
+//document.getElementsByClassName("bg-modal").style.display = "block";
+
+var celsius = "{{temp}}";
+		var f_like = "{{feels_like}}";
+		var fah = Math.round (celsius * 9/5 + 32);
+		var c = "Temperature: "+celsius.toString()+"&degC";	
+		var f = "Temperature: "+fah.toString()+"&degF";	
+
+		var fl = Math.round (f_like * 9/5 + 32);
+		var flc = "Feels like: "+f_like.toString()+"&degC";
+		var flf = "Feels like: "+fl.toString()+"&degF";
+
+		var sw_to_c = "Switch to &degC";
+		var sw_to_f = "Switch to &degF";
+
+	//Fucntion to toggle between temperature celsius and fahrenheit
+    function TempC_to_Fah() {
+      [c, f,] = [f,c];
+      document.getElementById("switch_Temp").innerHTML = c;
+    }
+
+	//Fucntion to toggle between feels like from celsius to fahrenheit and vice versa
+	function switch_feels_like() {
+      [flc, flf,] = [flf,flc];
+      document.getElementById("feels_like").innerHTML = flc;
+    }
+
+	   
+
+		//Fucntion to toggle between button text
+		function switch_btn_text() {
+      [sw_to_c, sw_to_f,] = [sw_to_f,sw_to_c];
+      document.getElementById("btn_Switch").innerHTML = sw_to_f;
+	  
+    }
+
+
+
+
+
+
+
+
+
+    //document.getElementById('close').addEventListener('click', function(){
+    //    document.querySelector('.bg-modal').style.display = 'none';
+    //})
+
+
+
+
+
+
+
+
+
+
+    var winter = 0,summer = 0,fall = 0;
+    var weather = "{{weather}}";
+
+    var winterImages = new Array();
+    winterImages[0] = "https://img.icons8.com/windows/96/000000/jacket.png";
+    winterImages[1] = "https://img.icons8.com/windows/96/000000/mens-hoodie.png";
+
+    var summerImages = new Array();
+    summerImages[0] = "https://img.icons8.com/windows/96/000000/basketball-jersey.png";
+    summerImages[1] = "https://img.icons8.com/windows/96/000000/swimming-shorts.png";
+
+    var fallImages = new Array();
+    fallImages[0] = "https://img.icons8.com/windows/96/000000/short-sleeve-shirt.png";
+    fallImages[1] = "https://img.icons8.com/windows/96/000000/v-neck-t-shirt.png";
+
+
+    if(weather == "Winter"){
+        document.getElementById("mainImage").src = winterImages[winter++];
+    }
+    else if(weather == "Summer"){
+        document.getElementById("mainImage").src = summerImages[summer++];
+    }
+    else if(weather == "Fall"){
+        document.getElementById("mainImage").src = fallImages[fall++];
+    }
+
+
+function changeOutfit(){
+    fall = fall%(fallImages.length);
+    summer = summer%(summerImages.length);
+    winter = winter%(winterImages.length);
+    
+    if(weather == "Winter"){
+        document.getElementById("mainImage").src = winterImages[winter++];
+    }
+    else if(weather == "Summer"){
+        document.getElementById("mainImage").src = summerImages[summer++];
+    }
+    else if(weather == "Fall"){
+        document.getElementById("mainImage").src = fallImages[fall++];
+    }
+}
+
+</script>
+{% endblock %}
