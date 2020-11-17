@@ -1,21 +1,15 @@
-{% extends 'base.html' %}
-
-{% block head %}
-<title>Magic Wardrobe Main Page</title>
-{% endblock %}
-
-{% block body %}
-
+<!DOCTYPE html>
+<html lang="en">
+<body>
 <!--Jack's work -->
-<div id="logo" style="float:left; margin:10px">
+
+<div id="logo" style="text-align: center;background-color: rgb(185, 129, 16);">
+	<h1 id="header">Magic Wardrobe</h1>
     <img src="static/images/wardrobeicon.png" width="90" height="90"/>
-</div>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-<div id="header">
-    <h1>Magic Wardrobe</h1>
+
 </div>
 
-<hr style="clear:both">
+<hr style="clear:both";>
 
 <!--Habib's work -->
 
@@ -30,38 +24,65 @@
 	<p style="margin-top: 0px; padding-bottom: 0%;"><button  type="submit" value="click" onclick="TempC_to_Fah(); switch_feels_like();switch_btn_text()" id="btn_Switch" style="padding: 8px; background-color: darkgreen; color: white; " > Switch to &degF</button></p>
 </div>
 
-<hr style="clear:both";>
+
 
 <!--Mustafa's work-->
-<div id = "image">
+<div id = "image" style="float:left; width: 25%; height: 100%;background-color:rgb(176, 222, 222); margin-left: 20px;">
+
     <h2>Recommended Outfit</h2>
-    <img id="mainImage" src="" style="width:120px;">
-</div>
+    <img id="mainImage" src="static/images/shirts.png" style="width:120px;">
+
 
 <button onClick="changeOutfit()">Change outfit</button>
+<br><br>
+</div>
 
-<!--Adrian's work
+
+<!--Adrian's work -->
 <form action="" method="POST"></form>
 
-<div class="bg-modal">
+<div class="bg-modal" id="bg-modal">
     <div class="modal-content">
         <div class="close" id="close">+</div>
         <img src="static/images/location.jpg" width="80px" height="80px"> 
 
         <p>Please enter your ZIP code below</p>
-        <form action="/" method="POST">
-            <input type="text" placeholder="A1A 1A1" name="zip" id="zip" required="required" pattern="[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]">
-            <input type="submit" value="Submit">
+        <form action="/" method="POST" name="form" id="form">
+            <input type="text" placeholder="A1A 1A1" name="zip" id="zip" required="required">
+            <!--<input type="submit" value="Submit" id="submit"> -->
+            <button onclick="validateForm()">Submit</button>
         </form>
     </div>
 
 </div>
 
--->
+
+<button id="changeLocation">Change location</button>
+</div>
+</body>
+</html>
+
 
 <script>
+ // X button to close zip code popup
+    document.getElementById('close').addEventListener('click', function(){
+        document.getElementById('bg-modal').style.display = 'none';
+    });
 
-//document.getElementsByClassName("bg-modal").style.display = "block";
+    //change loctaion button to show the zip code popup
+    document.getElementById('changeLocation').addEventListener('click', function(){  
+           document.getElementById('bg-modal').style.display = 'flex';
+        });
+
+    //close popup form after clicking submit
+    function validateForm() {
+        var inpObj = document.getElementById("zip");
+        if (inpObj.checkValidity()) {
+            document.getElementById("bg-modal").style.display = 'none';
+        }
+    }
+
+document.getElementsByClassName("bg-modal").style.display = "block";
 
 var celsius = "{{temp}}";
 		var f_like = "{{feels_like}}";
@@ -105,9 +126,9 @@ var celsius = "{{temp}}";
 
 
 
-    //document.getElementById('close').addEventListener('click', function(){
-    //    document.querySelector('.bg-modal').style.display = 'none';
-    //})
+    document.getElementById('close').addEventListener('click', function(){
+        document.querySelector('.bg-modal').style.display = 'none';
+    })
 
 
 
@@ -161,5 +182,5 @@ function changeOutfit(){
     }
 }
 
+
 </script>
-{% endblock %}
