@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <title>WELCOME!</title>
+    </head>
+<body>
+
+    <form action="" method="POST"></form>
+
+<div class="modal-welcome" id="modal-welcome">
+    <div class="modal-content" id="modal-content">
+        
+        <img src="static/images/location.jpg" width="80px" height="80px"> 
+
+        <p>Please enter your ZIP code below</p>
+        <form action="/" method="POST" name="form" id="form">
+            <input type="text" width="300px" placeholder="A1A 1A1" name="zip" id="zip" required="required" pattern="[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]">
+            <!--<input type="submit" value="Submit" id="submit"> -->
+            <p id="closes_window" ><button onclick="validateForm()">Submit</button></p>
+            
+        </form>
+    </div>
+
+</div>
+
+<script>
+
+
+    //close popup form after clicking submit
+    function validateForm() {
+        var inpObj = document.getElementById("zip");
+        if (inpObj.checkValidity()) {
+            document.getElementById("bg-modal").style.display = 'none';
+        }
+    }
+</script>
+    
+</body>
+
+</html>
